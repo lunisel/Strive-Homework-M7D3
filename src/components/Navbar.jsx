@@ -40,20 +40,21 @@ const NavBar = (props) => {
               style={{ maxHeight: "100px" }}
               navbarScroll
             >
-              <Nav.Link
-                href="/"
-                className={props.location.pathname === "/" ? "active" : ""}
+              <div
+                onClick={()=> props.history.push("/")}
+                className={props.location.pathname === "/" ? "active nav-link" : "nav-link"}
               >
                 Home
-              </Nav.Link>
-              <Nav.Link
+              </div>
+              <div
                 href="/profile"
+                onClick={()=> props.history.push("/profile")}
                 className={
-                  props.location.pathname === "/profile" ? "active" : ""
+                  props.location.pathname === "/profile" ? "active nav-link" : "nav-link"
                 }
               >
                 {props.email ? "My Profile" : "Sign-in"}
-              </Nav.Link>
+              </div>
               <NavDropdown title="Categories" id="navbarScrollingDropdown">
                 <Link className="category-link" to="/category/business">
                   Business
@@ -81,12 +82,6 @@ const NavBar = (props) => {
                 </Link>
                 <Link className="category-link" to="/category/sales">
                   Sales
-                </Link>
-                <Link
-                  className="category-link"
-                  to="/category/Finance%20/%20Legal"
-                >
-                  Finance / Legal
                 </Link>
                 <Link
                   className="category-link"
