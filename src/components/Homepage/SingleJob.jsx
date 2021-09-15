@@ -1,10 +1,22 @@
 import { Card } from "react-bootstrap";
+import { withRouter } from "react-router";
+import { connect } from "react-redux";
+import { addSelectedJobAction } from "../../actions";
 
-const SingleJob = ({ job, changeJob}) => {
+const mapStateToProps = (state) => state;
+
+const mapDispatchToProps = (dispatch) => ({
+  addSelectedJob: (job) => dispatch(addSelectedJobAction(job)),
+});
+
+const SingleJob = (props) => {
   return (
     <Card
       className="card-main"
-      onClick={() => changeJob(job)}
+      onClick={() => {
+        props.addSelectedJob(props.job);
+        props.history.push(`/details/${props.job._id}`);
+      }}
       style={{ cursor: "pointer" }}
     >
       <div className="cart-img-cont">
@@ -16,12 +28,15 @@ const SingleJob = ({ job, changeJob}) => {
       </div>
       <Card.Body className="d-flex">
         <div>
-          <Card.Text className="font-weight-bold">{job.title}</Card.Text>
-          <p>{job.company_name}</p>
+          <Card.Text className="font-weight-bold">{props.job.title}</Card.Text>
+          <p>{props.job.company_name}</p>
         </div>
       </Card.Body>
     </Card>
   );
 };
 
-export default SingleJob;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(SingleJob));
