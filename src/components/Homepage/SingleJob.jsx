@@ -1,11 +1,9 @@
 import { Card } from "react-bootstrap";
 
-const SingleJob = ({ job, changeJob, jobSelected }) => {
+const SingleJob = ({ job, changeJob}) => {
   return (
     <Card
-      className={
-        jobSelected?._id === job._id ? "card-main active" : "card-main"
-      }
+      className="card-main"
       onClick={() => changeJob(job)}
       style={{ cursor: "pointer" }}
     >

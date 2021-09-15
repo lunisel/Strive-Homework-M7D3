@@ -2,11 +2,12 @@ import { Component } from "react";
 import JobList from "./JobList";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { Container } from "react-bootstrap";
+import Loading from "../Loading";
 
 class Homepage extends Component {
   state = {
     jobs: [],
-    jobSelected: null,
+    isLoading: true,
   };
 
   getJobs = async () => {
@@ -19,6 +20,10 @@ class Homepage extends Component {
         let jobs = data.data;
         this.setState({ ...this.state, jobs: jobs });
         console.log(this.state);
+        this.setState({
+            ...this.state,
+            isLoading: false
+        })
       } else {
         console.log("error");
       }
@@ -31,16 +36,12 @@ class Homepage extends Component {
     await this.getJobs("limit=18");
   };
 
-  changeJob = (job) => this.setState({ jobSelected: job });
-
   render() {
     return (
       <Container>
-        <div className="home-cont">
+        {this.state.isLoading ? <Loading/> : (<div className="home-cont">
           <JobList
             jobs={this.state.jobs}
-            jobSelected={this.state.jobSelected}
-            changeJob={this.changeJob}
           />
           <div className="prev-next-cont my-2">
             <div
@@ -56,7 +57,7 @@ class Homepage extends Component {
               <BsArrowRight style={{ fontSize: "2rem" }} />
             </div>
           </div>
-        </div>
+        </div>)}
       </Container>
     );
   }

@@ -11,8 +11,6 @@ const JobList = (props) => {
             <Col xs={12} md={3} lg={2} className="mt-3" key={props.jobs._id}>
               <SingleJob
                 job={j}
-                jobSelected={props.jobSelected}
-                changeJob={props.changeJob}
               />
             </Col>
           ))}

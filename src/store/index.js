@@ -6,7 +6,7 @@ export const initialState = {
     email: "",
     favourite: [],
   },
-  jobs: [],
+  query:""
 };
 
 const configureStore = createStore(

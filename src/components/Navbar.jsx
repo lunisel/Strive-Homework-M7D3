@@ -9,11 +9,24 @@ import {
   Container,
 } from "react-bootstrap";
 import logo from "../assets/briefcase.png";
-import { CgProfile } from "react-icons/cg";
+import { useState } from "react";
+import { connect } from "react-redux";
+import { setQueryAction } from "../actions";
 
-const NavBar = () => {
+const mapStateToProps = (state) => ({
+  email: state.user.email,
+  query: state.query,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setQueryRedux: (queryToAdd) => dispatch(setQueryAction(queryToAdd)),
+});
+
+const NavBar = (props) => {
+  const [query, setQuery] = useState("");
   return (
     <>
+      {console.log(query)}
       <Navbar bg="light" expand="lg">
         <Container className="nav-cont">
           <Navbar.Brand href="/">
@@ -27,11 +40,21 @@ const NavBar = () => {
               style={{ maxHeight: "100px" }}
               navbarScroll
             >
-              <Nav.Link href="/">Home</Nav.Link>
+              <Nav.Link
+                href="/"
+                className={props.location.pathname === "/" ? "active" : ""}
+              >
+                Home
+              </Nav.Link>
+              <Nav.Link
+                href="/profile"
+                className={
+                  props.location.pathname === "/profile" ? "active" : ""
+                }
+              >
+                {props.email ? "My Profile" : "Sign-in"}
+              </Nav.Link>
               <NavDropdown title="Categories" id="navbarScrollingDropdown">
-                <Link className="category-link" to="/category/business">
-                  Business
-                </Link>
                 <Link className="category-link" to="/category/business">
                   Business
                 </Link>
@@ -82,21 +105,32 @@ const NavBar = () => {
                 </Link>
               </NavDropdown>
             </Nav>
-            <Form className="d-flex">
+            <Form
+              className="d-flex"
+              onSubmit={(e) => {
+                e.preventDefault();
+                props.setQueryRedux(query);
+              }}
+            >
               <FormControl
                 type="search"
                 placeholder="Search"
                 className="mr-2"
                 aria-label="Search"
+                value={query}
+                onChange={(e) => setQuery(e.currentTarget.value)}
+                onClick={() => {
+                  if (props.location.pathname === "/search") {
+                    console.log(query);
+                  } else {
+                    props.history.push("/search");
+                  }
+                }}
               />
-              <Button variant="outline-success">Search</Button>
+              <Button variant="outline-success" type="submit">
+                Search
+              </Button>
             </Form>
-            <Link to="/profile">
-              <CgProfile
-                style={{ fontSize: "4vh", color: "#4F5D73" }}
-                className="ml-3 profile-icon"
-              />
-            </Link>
           </Navbar.Collapse>
         </Container>
       </Navbar>
@@ -104,4 +138,4 @@ const NavBar = () => {
   );
 };
 
-export default withRouter(NavBar);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(NavBar));
