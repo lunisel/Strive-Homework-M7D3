@@ -9,8 +9,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    addToFavourites: (job) => dispatch(addToFavouritesAction(job)),
-  });
+  addToFavourites: (job) => dispatch(addToFavouritesAction(job)),
+});
 
 const Details = (props) => {
   return (
@@ -28,7 +28,14 @@ const Details = (props) => {
           <p>Job type: {props.job.job_type}</p>
           {props.job.salary !== "" ? <p>Salary: {props.job.salary}</p> : <></>}
           {props.email ? (
-            <Button onClick={()=> props.addToFavourites(props.job)}>Add to favourites</Button>
+            <Button
+              onClick={() => {
+                props.addToFavourites(props.job);
+                alert("Added to favourites!");
+              }}
+            >
+              Add to favourites
+            </Button>
           ) : (
             <p
               className="btn btn-light"
@@ -43,4 +50,7 @@ const Details = (props) => {
   );
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(withRouter(Details));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(Details));

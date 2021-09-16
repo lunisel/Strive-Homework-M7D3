@@ -21,9 +21,9 @@ class Homepage extends Component {
         this.setState({ ...this.state, jobs: jobs });
         console.log(this.state);
         this.setState({
-            ...this.state,
-            isLoading: false
-        })
+          ...this.state,
+          isLoading: false,
+        });
       } else {
         console.log("error");
       }
@@ -39,25 +39,27 @@ class Homepage extends Component {
   render() {
     return (
       <Container>
-        {this.state.isLoading ? <Loading/> : (<div className="home-cont">
-          <JobList
-            jobs={this.state.jobs}
-          />
-          <div className="prev-next-cont my-2">
-            <div
-              className="prev mr-2"
-              onClick={() => this.getJobs(`limit=18&skip=0`)}
-            >
-              <BsArrowLeft style={{ fontSize: "2rem" }} />
-            </div>
-            <div
-              className="next ml-2"
-              onClick={() => this.getJobs("limit=18&skip=18")}
-            >
-              <BsArrowRight style={{ fontSize: "2rem" }} />
-            </div>
+        {this.state.isLoading ? (
+          <Loading />
+        ) : (
+          <div className="home-cont">
+            <JobList jobs={this.state.jobs} />
+            {/* <div className="prev-next-cont my-2">
+              <div
+                className="prev mr-2"
+                onClick={() => this.getJobs(`limit=18&skip=0`)}
+              >
+                <BsArrowLeft style={{ fontSize: "2rem" }} />
+              </div>
+              <div
+                className="next ml-2"
+                onClick={() => this.getJobs("limit=18&skip=18")}
+              >
+                <BsArrowRight style={{ fontSize: "2rem" }} />
+              </div>}
+            </div> */}
           </div>
-        </div>)}
+        )}
       </Container>
     );
   }

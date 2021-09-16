@@ -28,7 +28,7 @@ const mainReducer = (state = initialState, action) => {
               ...state,
               user:{
                 ...state.user,
-                favourite: state.user.favourite.filter((job)=> job._id !== action.payload)
+                favourite: state.user.favourite.filter((job, i)=> i !== action.payload)
               }
             }
             case "ADD_SELECTED_JOB":

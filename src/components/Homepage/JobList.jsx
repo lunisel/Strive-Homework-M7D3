@@ -8,7 +8,7 @@ const JobList = (props) => {
       <Row>
         {props.jobs &&
           props.jobs.map((j) => (
-            <Col xs={12} md={3} lg={2} className="mt-3" key={props.jobs._id}>
+            <Col xs={12} md={3} className="mt-3" key={props.jobs._id}>
               <SingleJob
                 job={j}
               />
