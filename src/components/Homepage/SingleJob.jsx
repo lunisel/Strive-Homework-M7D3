@@ -19,13 +19,13 @@ const SingleJob = (props) => {
       }}
       style={{ cursor: "pointer" }}
     >
-      <div className="cart-img-cont">
+      {/* <div className="cart-img-cont">
         <img
           className="job-image img-fluid"
           src="http://placehold.it/200x200"
           alt="job cover"
         />
-      </div>
+      </div> */}
       <Card.Body className="d-flex">
         <div>
           <Card.Text className="font-weight-bold">{props.job.title}</Card.Text>
