@@ -140,3 +140,7 @@ div.card.card-main:hover {
   margin: 0;
   padding-top: 3rem;
 }
+
+.card {
+  justify-content: space-between;
+}
