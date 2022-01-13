@@ -34,23 +34,25 @@ const NavBar = (props) => {
             Search Jobs
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
-          <Navbar.Collapse id="navbarScroll">
-            <Nav
-              className="mr-auto my-2 my-lg-0"
-              style={{ maxHeight: "100px" }}
-              navbarScroll
-            >
+          <Navbar.Collapse>
+            <Nav className="mr-auto my-2 my-lg-0" navbarScroll>
               <div
-                onClick={()=> props.history.push("/")}
-                className={props.location.pathname === "/" ? "active nav-link" : "nav-link"}
+                onClick={() => props.history.push("/")}
+                className={
+                  props.location.pathname === "/"
+                    ? "active nav-link"
+                    : "nav-link"
+                }
               >
                 Home
               </div>
               <div
                 href="/profile"
-                onClick={()=> props.history.push("/profile")}
+                onClick={() => props.history.push("/profile")}
                 className={
-                  props.location.pathname === "/profile" ? "active nav-link" : "nav-link"
+                  props.location.pathname === "/profile"
+                    ? "active nav-link"
+                    : "nav-link"
                 }
               >
                 {props.email ? "My Profile" : "Sign-in"}
